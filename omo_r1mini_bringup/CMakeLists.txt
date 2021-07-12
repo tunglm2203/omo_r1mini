@@ -28,6 +28,7 @@ add_service_files(
   SaveColor.srv
   ResetOdom.srv
   Calg.srv
+  Onoff.srv
 )
 
 
