@@ -161,8 +161,8 @@ class OMOR1miniNode:
                             self.odom_pose.theta*180/math.pi )
         else:
             self.odom_pose.theta += orient_vel * dt
-            rospy.loginfo('R1mini state : wheel pos %s, %s, speed %s, %s', 
-                            odo_l, odo_r, trans_vel, orient_vel)
+            #rospy.loginfo('R1mini state : wheel pos %s, %s, speed %s, %s',
+            #                odo_l, odo_r, trans_vel, orient_vel)
 
         d_x = trans_vel * math.cos(self.odom_pose.theta) 
         d_y = trans_vel * math.sin(self.odom_pose.theta) 
