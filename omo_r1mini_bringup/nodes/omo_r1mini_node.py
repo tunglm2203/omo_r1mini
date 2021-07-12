@@ -118,7 +118,7 @@ class OMOR1miniNode:
         rospy.Service('set_led_color', Color, self.led_color_service_handle)
         rospy.Service('save_led_color', Color, self.save_led_color_service_handle)
         rospy.Service('reset_odom', ResetOdom, self.reset_odom_handle)
-        rospy.Service('set_headlight', ResetOdom, self.set_headlight_handle)
+        rospy.Service('set_headlight', Onoff, self.set_headlight_handle)
         #rospy.Service('calibrate_gyro', Calg, self.calibrate_gyro)
 
         rospy.Subscriber("cmd_vel", Twist, self.sub_cmd_vel, queue_size=1)
