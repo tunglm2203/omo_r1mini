@@ -267,13 +267,15 @@ class OMOR1miniNode:
         self.odom_pose.theta = req.theta
 
         return ResetOdomResponse()
+
     def set_headlight_handle(self, req):
         onoff = '0'
-        if req == true:
+        if req.set == true:
             onoff = '1'
         command = "$cHDLT," + onof
         self.ph.write_port(command)
         return OnoffResponse()
+
     # def calibrate_gyro(self, req):
     #     command = "$qCALG,1"
     #     self.ph.write_port(command)

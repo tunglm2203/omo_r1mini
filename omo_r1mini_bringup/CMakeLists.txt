@@ -22,6 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 add_service_files(
+  DIRECTORY srv
   FILES
   Battery.srv
   Color.srv
@@ -54,7 +55,16 @@ generate_messages(
 # Declare catkin specific configuration to be passed to dependent projects
 ################################################################################
 catkin_package(
-  CATKIN_DEPENDS rospy sensor_msgs nav_msgs geometry_msgs tf usb_cam #omo_r1mini_description
+  CATKIN_DEPENDS
+  rospy
+  sensor_msgs
+  nav_msgs
+  geometry_msgs
+  tf
+  usb_cam
+  #omo_r1mini_description
+  message_runtime
+  std_msgs
 )
 
 ################################################################################
