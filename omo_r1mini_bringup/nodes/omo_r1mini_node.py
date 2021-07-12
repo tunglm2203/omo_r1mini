@@ -270,9 +270,9 @@ class OMOR1miniNode:
 
     def set_headlight_handle(self, req):
         onoff = '0'
-        if req.set == true:
+        if req.set == True:
             onoff = '1'
-        command = "$cHDLT," + onof
+        command = "$cHDLT," + onoff
         self.ph.write_port(command)
         return OnoffResponse()
 
