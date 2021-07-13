@@ -192,6 +192,7 @@ class OMOR1miniNode:
         self.odom_pub.publish(odom)
 
     def updatePoseStates(self, roll, pitch, yaw):
+        #Added to publish pose orientation of IMU
         pose = Pose()
         pose.orientation.x = roll
         pose.orientation.y = pitch
