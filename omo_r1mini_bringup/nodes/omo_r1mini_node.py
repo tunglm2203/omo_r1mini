@@ -16,7 +16,7 @@ from omo_r1mini_bringup.srv import Color, ColorResponse
 from omo_r1mini_bringup.srv import SaveColor, SaveColorResponse
 from omo_r1mini_bringup.srv import ResetOdom, ResetOdomResponse
 from omo_r1mini_bringup.srv import Onoff, OnoffResponse
-#from omo_r1mini_bringup.srv import Calg, CalgResponse
+from omo_r1mini_bringup.srv import Calg, CalgResponse
 
 class OdomPose(object):
     x = 0.0
@@ -93,7 +93,7 @@ class OMOR1miniNode:
             "BAT" : [0., 0., 0.],
         } 
 
-        self.ph.incomming_info = ['ODO', 'VW', "GYRO", "ACCL"]
+        self.ph.incomming_info = ['ODO', 'VW', "POSE", "GYRO"]
 
         self.odom_pose = OdomPose()
         self.odom_vel = OdomVel()
@@ -119,13 +119,14 @@ class OMOR1miniNode:
         rospy.Service('save_led_color', Color, self.save_led_color_service_handle)
         rospy.Service('reset_odom', ResetOdom, self.reset_odom_handle)
         rospy.Service('set_headlight', Onoff, self.set_headlight_handle)
-        #rospy.Service('calibrate_gyro', Calg, self.calibrate_gyro)
+        rospy.Service('calibrate_gyro', Calg, self.calibrate_gyro)
 
         rospy.Subscriber("cmd_vel", Twist, self.sub_cmd_vel, queue_size=1)
 
         self.pub_joint_states = rospy.Publisher('joint_states', JointState, queue_size=10)
         self.odom_pub = rospy.Publisher("odom", Odometry, queue_size=10)
         self.odom_broadcaster = TransformBroadcaster()
+        self.pub_pose = rospy.Publisher("pose", Pose, queue_size=1000)
 
         self.ph.update_battery_state()
         self.ph.set_periodic_info()
@@ -190,6 +191,13 @@ class OMOR1miniNode:
       
         self.odom_pub.publish(odom)
 
+    def updatePoseStates(self, roll, pitch, yaw):
+        pose = Pose()
+        pose.orientation.x = roll
+        pose.orientation.y = pitch
+        pose.orientation.z = yaw
+        self.pub_pose.publish(pose)
+
     def updateJointStates(self, odo_l, odo_r, trans_vel, orient_vel):
         odo_l /= 1000.
         odo_r /= 1000.
@@ -221,11 +229,12 @@ class OMOR1miniNode:
             [odo_l, odo_r] = self.ph.robot_state['ODO']
             [vel_x, vel_y, vel_z] = self.ph.robot_state['GYRO']
             [acc_x, acc_y, acc_z] = self.ph.robot_state['ACCL']
-            # [roll_imu, pitch_imu, yaw_imu] = self.ph.robot_state['POSE']
+            [roll_imu, pitch_imu, yaw_imu] = self.ph.robot_state['POSE']
 
             self.update_odometry(odo_l, odo_r, trans_vel, orient_vel, vel_z)
             self.updateJointStates(odo_l, odo_r, trans_vel, orient_vel)
-
+            self.updatePoseStates(roll_imu, pitch_imu, yaw_imu)
+            
         except ValueError:
             rospy.logwarn("ValueError occupied during read robot status in update_robot state. \n\r Raw_data : %s", 
                             raw_data)
@@ -276,10 +285,10 @@ class OMOR1miniNode:
         self.ph.write_port(command)
         return OnoffResponse()
 
-    # def calibrate_gyro(self, req):
-    #     command = "$qCALG,1"
-    #     self.ph.write_port(command)
-    #     return CalgResponse()
+    def calibrate_gyro(self, req):
+        command = "$qCALG,1"
+        self.ph.write_port(command)
+        return CalgResponse()
 
 
     def main(self):
