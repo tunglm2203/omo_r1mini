@@ -274,7 +274,6 @@ class OMOR1miniNode:
         self.odom_pose.x = req.x
         self.odom_pose.y = req.y
         self.odom_pose.theta = req.theta
-
         return ResetOdomResponse()
 
     def set_headlight_handle(self, req):
