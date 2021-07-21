@@ -1,0 +1,8 @@
+<launch>
+  
+  <include file="$(find omo_r1mini_bringup)/launch/omo_r1mini_bringup.launch">
+  </include>
+  <include file="$(find omo_r1mini_bringup)/launch/omo_r1mini_camera.launch">
+  </include>
+  <!-- <include file="$(find omo_r1mini_bringup)/launch/omo_r1mini_lidar_hlds.launch" /> -->
+</launch>

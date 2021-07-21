@@ -84,7 +84,7 @@ class PacketHandler:
 
    def set_periodic_info(self):
       for idx, each in enumerate(self.incomming_info):
-         print("$cREGI," + str(idx) + "," + each)
+         #print("$cREGI," + str(idx) + "," + each)
          self.write_port("$cREGI," + str(idx) + "," + each)
 
       self.update_battery_state()

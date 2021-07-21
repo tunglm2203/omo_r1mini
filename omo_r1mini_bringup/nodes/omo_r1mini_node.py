@@ -286,7 +286,7 @@ class OMOR1miniNode:
         return OnoffResponse()
 
     def calibrate_gyro(self, req):
-        command = "$qCALG,1"
+        command = "$sCALG,1"
         self.ph.write_port(command)
         return CalgResponse()
 
