@@ -75,6 +75,8 @@ class ComplementaryFilter():
 
 class OMOR1miniNode:
     def __init__(self):
+        self.modelName = rospy.get_param('~modelName')
+        print "Model Name:"+ self.modelName
         self.ph = PacketHandler()
         self.ph.ser.reset_input_buffer() 
         self.ph.ser.reset_output_buffer() 
@@ -122,12 +124,20 @@ class OMOR1miniNode:
         rospy.Service('calibrate_gyro', Calg, self.calibrate_gyro)
 
         rospy.Subscriber("cmd_vel", Twist, self.sub_cmd_vel, queue_size=1)
-
+        
         self.pub_joint_states = rospy.Publisher('joint_states', JointState, queue_size=10)
         self.odom_pub = rospy.Publisher("odom", Odometry, queue_size=10)
         self.odom_broadcaster = TransformBroadcaster()
         self.pub_pose = rospy.Publisher("pose", Pose, queue_size=1000)
 
+        if self.modelName == 'r1mini':
+            self.ph.incomming_info = ['ODO', 'VW', "POSE", "GYRO"]
+            
+        elif self.modelName == 'r1miniBoat':
+            self.ph.incomming_info = ['BAT', "GYRO"]
+            self.max_thrust = 1000.0
+            self.max_steer = 500.0
+            #Do not publish pose
         self.ph.update_battery_state()
         self.ph.set_periodic_info()
 
@@ -241,13 +251,25 @@ class OMOR1miniNode:
                             raw_data)
       
     def sub_cmd_vel(self, cmd_vel_msg):
-        lin_vel_x = cmd_vel_msg.linear.x
-        ang_vel_z = cmd_vel_msg.angular.z
+        if self.modelName == 'r1miniBoat':
+            thrust = cmd_vel_msg.linear.x
+            steer = cmd_vel_msg.angular.z
+            thrust = max(-self.max_thrust, min(self.max_thrust, thrust))
+            steer = max(-self.max_steer, min(self.max_steer, steer))
+            thrust_out = thrust
+            steer_out = steer + self.max_steer
+            rospy.loginfo('R1mini command : Thrust %s, Steer %s',
+                            thrust_out, steer_out)
+            self.ph.set_thrust_steer(thrust_out, steer_out)
 
-        lin_vel_x = max(-self.max_lin_vel_x, min(self.max_lin_vel_x, lin_vel_x))
-        ang_vel_z = max(-self.max_ang_vel_z, min(self.max_ang_vel_z, ang_vel_z))
+        else :
+            lin_vel_x = cmd_vel_msg.linear.x
+            ang_vel_z = cmd_vel_msg.angular.z
 
-        self.ph.set_wheel_velocity(lin_vel_x*1000, ang_vel_z*1000)
+            lin_vel_x = max(-self.max_lin_vel_x, min(self.max_lin_vel_x, lin_vel_x))
+            ang_vel_z = max(-self.max_ang_vel_z, min(self.max_ang_vel_z, ang_vel_z))
+
+            self.ph.set_wheel_velocity(lin_vel_x*1000, ang_vel_z*1000)
 
     def battery_service_handle(self, req):
         self.ph.update_battery_state()

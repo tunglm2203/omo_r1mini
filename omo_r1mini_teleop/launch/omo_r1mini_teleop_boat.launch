@@ -1,0 +1,10 @@
+<launch>
+  <!-- keyboard teleoperation node for omo r1 robot -->
+  <node pkg="omo_r1mini_teleop" type="omo_r1mini_teleop_key.py" name="omo_r1mini_teleop_boat"  output="screen">
+    <param name="max_lin_vel" value="1000" />
+    <param name="min_lin_vel" value="0" />
+    <param name="max_ang_vel" value="500" />
+    <param name="lin_vel_step" value="50" />
+    <param name="ang_vel_step" value="20" />
+  </node>
+</launch>

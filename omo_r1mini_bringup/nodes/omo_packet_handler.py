@@ -103,3 +103,6 @@ class PacketHandler:
 
    def set_wheel_velocity(self, l_vel, r_vel):
       self.write_port('$cVW,{:.0f},{:.0f}'.format(l_vel, r_vel))
+
+   def set_thrust_steer(self, thrust, steer):
+      self.write_port('$cSVO,{:.0f},{:.0f}'.format(thrust, steer))
