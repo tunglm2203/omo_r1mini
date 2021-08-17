@@ -3,6 +3,7 @@
   <node pkg="omo_r1mini_teleop" type="omo_r1mini_teleop_key.py" name="omo_r1mini_teleop_keyboard"  output="screen">
     <param name="max_lin_vel" value="1.2" />
     <param name="max_ang_vel" value="1.8" />
+    <param name="min_lin_vel" value="-1.0" />
     <param name="lin_vel_step" value="0.05" />
     <param name="ang_vel_step" value="0.1" />
   </node>
