@@ -4,6 +4,12 @@
       <param name="port" value="$(arg set_port)"/>
       <param name="baud" value="115200"/>
       <param name="modelName" value="r1miniBoat"/>
+      <param name="thrust_max" value="300"/>
+      <param name="thrust_min" value="-300"/>
+      <param name="thrust_mid" value="530"/>
+      <param name="servo_max" value="500"/>
+      <param name="servo_min" value="-500"/>
+      <param name="servo_mid" value="500"/>
   </node>
   <rosparam command="load" file="$(find omo_r1mini_bringup)/config/robot_config.yaml" />
 </launch>
