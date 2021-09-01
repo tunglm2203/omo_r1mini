@@ -83,9 +83,6 @@ class OMOR1miniNode:
         self.ph.stop_periodic_comm() 
         self.calc_yaw = ComplementaryFilter()
 
-        self.max_lin_vel_x = 1.2
-        self.max_ang_vel_z = 1.0
-
         self.ph.robot_state = {
             "VW" : [0., 0.],
             "ODO" : [0., 0.],
@@ -132,11 +129,10 @@ class OMOR1miniNode:
 
         if self.modelName == 'r1mini':
             self.ph.incomming_info = ['ODO', 'VW', "POSE", "GYRO"]
-            
+            self.max_lin_vel_x = rospy.get_param("~max_lin_vel_x")
+            self.max_ang_vel_z = rospy.get_param("~max_ang_vel_z")
         elif self.modelName == 'r1miniBoat':
             self.ph.incomming_info = ['BAT', "GYRO"]
-            #self.max_thrust = 500.0
-            #self.max_steer = 500.0
             self.thrust_mid = rospy.get_param("~thrust_mid")
             self.thrust_max = rospy.get_param("~thrust_max")
             self.thrust_min = rospy.get_param("~thrust_min")
