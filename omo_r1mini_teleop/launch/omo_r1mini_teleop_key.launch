@@ -1,10 +1,12 @@
 <launch>
   <!-- keyboard teleoperation node for omo r1 robot -->
+  <arg name="set_multi_robot_name" default=""/>
   <node pkg="omo_r1mini_teleop" type="omo_r1mini_teleop_key.py" name="omo_r1mini_teleop_keyboard"  output="screen">
-    <param name="max_lin_vel" value="1.2" />
+    <param name="max_lin_vel" value="1.5" />
     <param name="max_ang_vel" value="1.8" />
-    <param name="min_lin_vel" value="-1.0" />
+    <param name="min_lin_vel" value="-1.5" />
     <param name="lin_vel_step" value="0.05" />
     <param name="ang_vel_step" value="0.1" />
+    <param name="tf_prefix" value="$(arg set_multi_robot_name)"/>
   </node>
 </launch>

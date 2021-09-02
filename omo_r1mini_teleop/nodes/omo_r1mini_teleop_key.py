@@ -113,12 +113,14 @@ if __name__=="__main__":
         settings = termios.tcgetattr(sys.stdin)
     
     rospy.init_node('omo_r1mini_teleop')
+    tf_prefix = rospy.get_param("~tf_prefix", "")
+    print("tf_prefix:"+tf_prefix)
     max_lin_vel = rospy.get_param("~max_lin_vel") #OMO_R1mini_MAX_LIN_VEL = 1.20
     min_lin_vel = rospy.get_param("~min_lin_vel")
     max_ang_vel = rospy.get_param("~max_ang_vel") #OMO_R1mini_MAX_ANG_VEL = 1.80
     lin_vel_step_size = rospy.get_param("~lin_vel_step")    #LIN_VEL_STEP_SIZE = 0.05
     ang_vel_step_size = rospy.get_param("~ang_vel_step")    #ANG_VEL_STEP_SIZE = 0.1
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    pub = rospy.Publisher(tf_prefix+'/cmd_vel', Twist, queue_size=10)
 
     status = 0
     target_linear_vel   = 0.0
