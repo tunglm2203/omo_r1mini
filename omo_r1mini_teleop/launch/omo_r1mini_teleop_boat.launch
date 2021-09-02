@@ -3,11 +3,7 @@
   <node pkg="omo_r1mini_teleop" type="omo_r1mini_teleop_key.py" name="omo_r1mini_teleop_boat"  output="screen">
     <param name="max_lin_vel" value="300" />
     <param name="min_lin_vel" value="-300" />
-<<<<<<< HEAD
-    <param name="max_ang_vel" value="500" />
-=======
     <param name="max_ang_vel" value="130" />
->>>>>>> e29d26eb0521dcd0b9d893810c600820cb62301a
     <param name="lin_vel_step" value="10" />
     <param name="ang_vel_step" value="20" />
   </node>
