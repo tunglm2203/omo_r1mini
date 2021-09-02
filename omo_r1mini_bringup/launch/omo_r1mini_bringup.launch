@@ -1,9 +1,13 @@
 <launch>
   <arg name="set_port" default="/dev/ttyTHS1"/>
+  <arg name="set_max_lin_vel_x" default="1.2"/>
+  <arg name="set_max_ang_vel_z" default="1.0"/>
   <node pkg="omo_r1mini_bringup" type="omo_r1mini_node.py" name="omo_r1mini_node" output="screen">
       <param name="port" value="$(arg set_port)"/>
       <param name="baud" value="115200"/>
       <param name="modelName" value="r1mini"/>
+      <param name="max_lin_vel_x" value="$(arg set_max_lin_vel_x)"/>
+      <param name="max_ang_vel_z" value="$(arg set_max_ang_vel_z)"/>
   </node>
   <rosparam command="load" file="$(find omo_r1mini_bringup)/config/robot_config.yaml" />
 </launch>

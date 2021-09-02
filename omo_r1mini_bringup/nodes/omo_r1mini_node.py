@@ -83,9 +83,6 @@ class OMOR1miniNode:
         self.ph.stop_periodic_comm() 
         self.calc_yaw = ComplementaryFilter()
 
-        self.max_lin_vel_x = 1.2
-        self.max_ang_vel_z = 1.0
-
         self.ph.robot_state = {
             "VW" : [0., 0.],
             "ODO" : [0., 0.],
@@ -132,11 +129,16 @@ class OMOR1miniNode:
 
         if self.modelName == 'r1mini':
             self.ph.incomming_info = ['ODO', 'VW', "POSE", "GYRO"]
-            
+            self.max_lin_vel_x = rospy.get_param("~max_lin_vel_x")
+            self.max_ang_vel_z = rospy.get_param("~max_ang_vel_z")
         elif self.modelName == 'r1miniBoat':
             self.ph.incomming_info = ['BAT', "GYRO"]
-            self.max_thrust = 1000.0
-            self.max_steer = 500.0
+            self.thrust_mid = rospy.get_param("~thrust_mid")
+            self.thrust_max = rospy.get_param("~thrust_max")
+            self.thrust_min = rospy.get_param("~thrust_min")
+            self.servo_mid = rospy.get_param("~servo_mid")
+            self.servo_max = rospy.get_param("~servo_max")
+            self.servo_min = rospy.get_param("~servo_min")
             #Do not publish pose
         self.ph.update_battery_state()
         self.ph.set_periodic_info()
@@ -252,12 +254,12 @@ class OMOR1miniNode:
       
     def sub_cmd_vel(self, cmd_vel_msg):
         if self.modelName == 'r1miniBoat':
-            thrust = cmd_vel_msg.linear.x
+            thrust = -cmd_vel_msg.linear.x
             steer = cmd_vel_msg.angular.z
-            thrust = max(-self.max_thrust, min(self.max_thrust, thrust))
-            steer = max(-self.max_steer, min(self.max_steer, steer))
-            thrust_out = thrust
-            steer_out = steer + self.max_steer
+            thrust = max(self.thrust_min, min(self.thrust_max, thrust))
+            steer = max(self.servo_min, min(self.servo_max, steer))
+            thrust_out = thrust + self.thrust_mid
+            steer_out = steer + self.servo_mid
             rospy.loginfo('R1mini command : Thrust %s, Steer %s',
                             thrust_out, steer_out)
             self.ph.set_thrust_steer(thrust_out, steer_out)
