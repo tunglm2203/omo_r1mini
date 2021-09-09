@@ -7,7 +7,8 @@ This project is about ROS Package for OMOROBOT's R1mini mobile robot platform.
 
 ## Overview
 
-다음은 R1mini Pro 대표 이미지 이며 다음 [페이지](https://smartstore.naver.com/omorobot/products/5760164420)에서 구매하실 수 있습니다. 
+다음은 R1mini Pro 대표 이미지 이며 다음 [페이지](https://smartstore.naver.com/omorobot/products/5760164420)에서 구매하실 수 있습니다.  
+
 Below image represents R1mini PRO which can be purchased from [here](https://omorobot.com/product/r1-mini/).
 <div align="center">
   <img src="images/r1mini_pro.png">
@@ -21,8 +22,8 @@ For English version tutorial, please refer to below gitbook page.
 
 ## Installation
 
-This package assumes you are running nvidia's **Jetson nano** board as **ROBOT** which comes with R1mini PRO pakcage. 
-If you have installed Jetson nano yourself and setup from scratch, please download our Jetson nano image file [jetson_210720.img](https://www.dropbox.com/s/955eac4ffhbajyu/jetson_210720.img?dl=0) and flash into 32gb micro sdcard. 
+This package assumes you are running nvidia's **Jetson nano** board as **ROBOT** which comes with R1mini PRO pakcage.  
+If you have installed Jetson nano yourself and setup from scratch, please download our Jetson nano image file [jetson_210720.img](https://www.dropbox.com/s/955eac4ffhbajyu/jetson_210720.img?dl=0) and flash into 32gb micro sdcard.  
 You can use [etcher](https://www.balena.io/etcher/) for flashing image to sdcard.
 
 This image comes with following setup
