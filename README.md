@@ -86,18 +86,23 @@ This allows you to move the robot simply by keyboard input as
 <div align="center">
   <img src="images/r1mini_slam.png">
 </div>
-To run 2D lidar based SLAM navigation, simply launch below in ROBOT
+
+To run 2D lidar based SLAM navigation, simply launch below in ROBOT.  
+
 ```
 $ roslaunch omo_r1mini_bringup omo_r1mini_robot.launch
 $ roslaunch omo_r1mini_slam omo_r1mini_slam.launch
 ```
-Launch below in HOST PC to open rviz environment to make map
+
+Launch below in HOST PC to open rviz environment to make map.  
 ```
 $ roslaunch omo_r1mini_slam omo_r1mini_slam_rviz.launch
 $ roslaunch omo_r1mini_teleop omo_r1mini_teleop_key.launch
 ```
+
 Move the robot using keyboard input (W: FWD, A: Left, D: Right, X: REV) and map will be expanded as it go.
 Once map is fully generated, enter below to save **map.yaml** and **map.pgm** files.
+
 ```
 $ rosrun map_server map_saver -f map
 ```
@@ -109,13 +114,13 @@ Terminate all nodes and copy these files and place into ROBOT's *~/catkin_ws/src
   <img src="images/r1mini_navigation.png">
 </div>
 
-To start SLAM navigation launch below in ROBOT.
+To start SLAM navigation launch below in ROBOT.  
 
 ```
 $ roslaunch omo_r1mini_bringup omo_r1mini_robot.launch
 $ roslaunch omo_r1mini_navigation omo_r1mini_navigation.launch
 ```
-Then launch below in HOST PC to open the robot in rviz environment.
+Then launch below in HOST PC to open the robot in rviz environment.  
 ```
 $ roslaunch omo_r1mini_navigation omo_r1mini_navigation_rviz.launch
 ```
