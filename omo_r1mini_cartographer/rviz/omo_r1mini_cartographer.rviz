@@ -1,5 +1,5 @@
 Panels:
-  - Class: rviz_common/Displays
+  - Class: rviz/Displays
     Help Height: 78
     Name: Displays
     Property Tree Widget:
@@ -10,15 +10,15 @@ Panels:
         - /Cartographer1
       Splitter Ratio: 0.5794117450714111
     Tree Height: 785
-  - Class: rviz_common/Selection
+  - Class: rviz/Selection
     Name: Selection
-  - Class: rviz_common/Tool Properties
+  - Class: rviz/Tool Properties
     Expanded:
       - /Publish Point1
       - /2D Pose Estimate1
     Name: Tool Properties
     Splitter Ratio: 0.5886790156364441
-  - Class: rviz_common/Views
+  - Class: rviz/Views
     Expanded:
       - /Current View1
     Name: Views
@@ -28,7 +28,7 @@ Visualization Manager:
   Displays:
     - Alpha: 0.5
       Cell Size: 1
-      Class: rviz_default_plugins/Grid
+      Class: rviz/Grid
       Color: 160; 160; 164
       Enabled: true
       Line Style:
@@ -44,7 +44,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Class: rviz_default_plugins/TF
+    - Class: rviz/TF
       Enabled: true
       Frame Timeout: 15
       Frames:
@@ -111,7 +111,7 @@ Visualization Manager:
         Value: true
       Axis: Z
       Channel Name: intensity
-      Class: rviz_default_plugins/LaserScan
+      Class: rviz/LaserScan
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
@@ -137,7 +137,7 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Angle Tolerance: 0.10000000149011612
-      Class: rviz_default_plugins/Odometry
+      Class: rviz/Odometry
       Covariance:
         Orientation:
           Alpha: 0.5
@@ -175,7 +175,7 @@ Visualization Manager:
         Value: /odom
       Value: false
     - Alpha: 0.699999988079071
-      Class: rviz_default_plugins/Map
+      Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
       Enabled: true
@@ -194,12 +194,12 @@ Visualization Manager:
         Value: /map_updates
       Use Timestamp: false
       Value: true
-    - Class: rviz_common/Group
+    - Class: rviz/Group
       Displays:
-        - Class: rviz_common/Group
+        - Class: rviz/Group
           Displays:
             - Alpha: 0.699999988079071
-              Class: rviz_default_plugins/Map
+              Class: rviz/Map
               Color Scheme: costmap
               Draw Behind: true
               Enabled: true
@@ -220,7 +220,7 @@ Visualization Manager:
               Value: true
             - Alpha: 1
               Buffer Length: 1
-              Class: rviz_default_plugins/Path
+              Class: rviz/Path
               Color: 255; 0; 0
               Enabled: true
               Head Diameter: 0.30000001192092896
@@ -247,10 +247,10 @@ Visualization Manager:
               Value: true
           Enabled: true
           Name: Global Map
-        - Class: rviz_common/Group
+        - Class: rviz/Group
           Displays:
             - Alpha: 1
-              Class: rviz_default_plugins/Polygon
+              Class: rviz/Polygon
               Color: 25; 255; 0
               Enabled: true
               Name: Polygon
@@ -262,7 +262,7 @@ Visualization Manager:
                 Value: /local_costmap/footprint
               Value: true
             - Alpha: 0.699999988079071
-              Class: rviz_default_plugins/Map
+              Class: rviz/Map
               Color Scheme: costmap
               Draw Behind: false
               Enabled: true
@@ -283,7 +283,7 @@ Visualization Manager:
               Value: true
             - Alpha: 1
               Buffer Length: 1
-              Class: rviz_default_plugins/Path
+              Class: rviz/Path
               Color: 255; 255; 0
               Enabled: true
               Head Diameter: 0.30000001192092896
@@ -314,7 +314,7 @@ Visualization Manager:
           Arrow Length: 0.05000000074505806
           Axes Length: 0.30000001192092896
           Axes Radius: 0.009999999776482582
-          Class: rviz_default_plugins/PoseArray
+          Class: rviz/PoseArray
           Color: 0; 192; 0
           Enabled: true
           Head Length: 0.07000000029802322
@@ -332,7 +332,7 @@ Visualization Manager:
           Value: true
       Enabled: false
       Name: Navigation
-    - Class: rviz_common/Group
+    - Class: rviz/Group
       Displays:
         - Alpha: 1
           Autocompute Intensity Bounds: true
@@ -342,7 +342,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz_default_plugins/PointCloud2
+          Class: rviz/PointCloud2
           Color: 0; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
@@ -367,7 +367,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-        - Class: rviz_default_plugins/MarkerArray
+        - Class: rviz/MarkerArray
           Enabled: false
           Name: Trajectories
           Namespaces:
@@ -379,7 +379,7 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /trajectory_node_list
           Value: false
-        - Class: rviz_default_plugins/MarkerArray
+        - Class: rviz/MarkerArray
           Enabled: false
           Name: Constraints
           Namespaces:
@@ -391,7 +391,7 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /constraint_list
           Value: false
-        - Class: rviz_default_plugins/MarkerArray
+        - Class: rviz/MarkerArray
           Enabled: false
           Name: Landmark Poses
           Namespaces:
@@ -412,19 +412,19 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz_default_plugins/MoveCamera
-    - Class: rviz_default_plugins/Select
-    - Class: rviz_default_plugins/FocusCamera
-    - Class: rviz_default_plugins/Measure
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
       Line color: 128; 128; 0
-    - Class: rviz_default_plugins/SetGoal
+    - Class: rviz/SetGoal
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /move_base_simple/goal
-    - Class: rviz_default_plugins/PublishPoint
+    - Class: rviz/PublishPoint
       Single click: true
       Topic:
         Depth: 5
@@ -432,7 +432,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /clicked_point
-    - Class: rviz_default_plugins/SetInitialPose
+    - Class: rviz/SetInitialPose
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -441,11 +441,11 @@ Visualization Manager:
         Value: initialpose
   Transformation:
     Current:
-      Class: rviz_default_plugins/TF
+      Class: rviz/TF
   Value: true
   Views:
     Current:
-      Class: rviz_default_plugins/Orbit
+      Class: rviz/TopDownOrtho
       Distance: 6.2725830078125
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -463,7 +463,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.17479735612869263
       Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
+      Value: TopDownOrtho (rviz)
       Yaw: 3.795415163040161
     Saved: ~
 Window Geometry:
