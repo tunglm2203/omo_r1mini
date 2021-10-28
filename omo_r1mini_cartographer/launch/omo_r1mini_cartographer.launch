@@ -1,0 +1,13 @@
+<launch>
+   <arg name="config_file" default="omo_r1mini_lidar.lua"/>
+   <!-- launching state publishers -->
+   <include file="$(find omo_r1mini_description)/launch/description_g2.launch"/>
+   
+   <!-- launching cartographer node and parameters -->
+   <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="-configuration_directory $(find omo_r1mini_cartographer)/config -configuration_basename omo_r1mini_lidar.lua" output="screen">
+      <!--<env name="configuration_directory" value="$(find omo_r1mini_cartographer)/config">
+      <env name="configuration_basename" value="$(config_file)">-->
+   </node>
+
+   <inclue file="$(find omo_r1mini_cartographer)/launch/occupancy_grid.launch"/>
+</launch>
