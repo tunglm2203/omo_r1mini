@@ -120,6 +120,7 @@ if __name__=="__main__":
     max_ang_vel = rospy.get_param("~max_ang_vel") #OMO_R1mini_MAX_ANG_VEL = 1.80
     lin_vel_step_size = rospy.get_param("~lin_vel_step")    #LIN_VEL_STEP_SIZE = 0.05
     ang_vel_step_size = rospy.get_param("~ang_vel_step")    #ANG_VEL_STEP_SIZE = 0.1
+    ang_vel_rev = rospy.get_param("~ang_vel_reverse")       #1 for reversed
     pub = rospy.Publisher(tf_prefix+'/cmd_vel', Twist, queue_size=10)
 
     status = 0
@@ -141,11 +142,17 @@ if __name__=="__main__":
                 status = status + 1
                 print(vels(target_linear_vel,target_angular_vel))
             elif key == 'a' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ang_vel_step_size, max_ang_vel)
+                if ang_vel_rev == 1:
+                    target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ang_vel_step_size, max_ang_vel)    
+                else:
+                    target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ang_vel_step_size, max_ang_vel)
                 status = status + 1
                 print(vels(target_linear_vel,target_angular_vel))
             elif key == 'd' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ang_vel_step_size, max_ang_vel)
+                if ang_vel_rev == 1:
+                    target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ang_vel_step_size, max_ang_vel)
+                else:
+                    target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ang_vel_step_size, max_ang_vel)
                 status = status + 1
                 print(vels(target_linear_vel,target_angular_vel))
             elif key == ' ' or key == 's' :

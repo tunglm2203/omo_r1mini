@@ -7,6 +7,7 @@
     <param name="min_lin_vel" value="-1.5" />
     <param name="lin_vel_step" value="0.05" />
     <param name="ang_vel_step" value="0.1" />
+    <param name="ang_vel_reverse" value="0" />
     <param name="tf_prefix" value="$(arg set_multi_robot_name)"/>
   </node>
 </launch>
