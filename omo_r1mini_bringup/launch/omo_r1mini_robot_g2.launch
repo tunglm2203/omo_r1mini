@@ -1,6 +1,6 @@
 <launch>
   <arg name="set_lidar_frame_id" default="base_scan"/>
-  <arg name="set_port_lidar" default="/dev/ydlidar"/>
+  <arg name="set_port_lidar" default="/dev/ttyLiDAR"/>
 
   <include file="$(find omo_r1mini_bringup)/launch/omo_r1mini_bringup.launch">
   </include>
