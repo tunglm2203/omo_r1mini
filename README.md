@@ -30,7 +30,7 @@ This image comes with following setup
 - Jetpack 4.4
 - ROS-melodic
 - Catkin workspace is located in ~/catkin_ws
-- Default sudo password is "1"
+- Default sudo password is "1" or "omorobot"
 
 Once you flash installed Jetson nano, just login with default password and try to git pull this project by
 ```
@@ -42,7 +42,7 @@ $ git pull
 ## Additional packages
 
 Below pacakges are maybe required run this package and are located in ROBOT's **catkin_ws/src** folder
-- https://github.com/PinkWink/ydlidar to run ydlidar
+- https://github.com/YDLIDAR/ydlidar_ros to run ydlidar
 - https://github.com/PinkWink/darknet_ros for running YOLO v3 
 - https://github.com/Tossy0423/yolov4-for-darknet_ros for running YOLO v4
 
@@ -65,7 +65,8 @@ ros-melodic-urdf ros-melodic-xacro ros-melodic-usb-cam \
 ros-melodic-compressed-image-transport \
 ros-melodic-rqt-image-view ros-melodic-gmapping \
 ros-melodic-navigation ros-melodic-interactive-markers \
-ros-melodic-ar-track-alvar ros-melodic-ar-track-alvar-msgs 
+ros-melodic-ar-track-alvar ros-melodic-ar-track-alvar-msgs \
+ros-melodic-cartographer-ros
 ```
 
 ## Running the Robot
@@ -83,7 +84,12 @@ This allows you to move the robot simply by keyboard input as
 - D: Turn Right (Decrease rot_vel.z)
 - X: Move REV (Decrease lin_vel.x)
 
-## SLAM Mapping
+## SLAM Mapping  
+
+### Mapping using Gmapping
+
+**omo_r1mini_slam** package uses gmapping for SLAM mapping.  
+
 <div align="center">
   <img src="images/r1mini_slam.png">
 </div>
@@ -101,11 +107,38 @@ $ roslaunch omo_r1mini_slam omo_r1mini_slam_rviz.launch
 $ roslaunch omo_r1mini_teleop omo_r1mini_teleop_key.launch
 ```
 
-Move the robot using keyboard input (W: FWD, A: Left, D: Right, X: REV) and map will be expanded as it go.
-Once map is fully generated, enter below to save **map.yaml** and **map.pgm** files.
+Move the robot using keyboard input (W: FWD, A: Left, D: Right, X: REV) and the map will be expanded as it go.
+
+### Mapping using Cartographer ROS
+
+Cartographer generate maps smoother and more precise compare to gmapping and support for various type of sensors such as Depth camera or 3D lidar.  
+
+More information can be found its website.
+
+https://google-cartographer-ros.readthedocs.io/en/latest/
+
+To run cartographer-ros, simply launch below in ROBOT.
 
 ```
-$ rosrun map_server map_saver -f map
+$ roslaunch omo_r1mini_bringup omo_r1mini_robot.launch
+$ roslaunch omo_r1mini_cartographer omo_r1mini_cartographer.launch
+```
+
+Launch below in HOST PC to run rviz environment and robot control.  
+```
+$ roslaunch omo_r1mini_cartographer omo_r1mini_cartographer_rviz.launch
+$ roslaunch omo_r1mini_teleop omo_r1mini_teleop_key.launch
+```
+<div align="center">
+  <img src="images/cartographer_mapping_rviz.png">
+</div>
+
+### Save map file
+
+Once map is fully generated, run map_server to save **<name_of_map>.yaml** and **<name_of_map>.pgm** files as below.
+
+```
+$ rosrun map_server map_saver -f <name_of_map>
 ```
 Terminate all nodes and copy these files and place into ROBOT's *~/catkin_ws/src/omo_r1mini/omo_r1mini_navigation/maps* 
 
