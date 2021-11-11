@@ -1,16 +1,14 @@
 <launch>
   <!-- Arguments -->
-  <!--<arg name="map_file" default="$(find omo_r1mini_navigation2)/maps/office.yaml"/>-->
-  <arg name="move_forward_only" default="false"/>
-  <arg name="carto_map" default="$(find omo_r1mini_navigation2)/maps/map.pbstream" />
+  <arg name="map_file" default="$(find omo_r1mini_navigation2)/maps/map.yaml"/>
+  <arg name="move_forward_only" default="true"/>
   <!-- launching state publishers -->
   <include file="$(find omo_r1mini_description)/launch/description_g2.launch"/>
 
   <!-- launching cartographer node and parameters -->
   <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
         -configuration_directory $(find omo_r1mini_cartographer)/config 
-        -configuration_basename omo_r1mini_lidar.lua
-        -load_state_filename $(find omo_r1mini_navigation2)/maps/map.pbstream"
+        -configuration_basename omo_r1mini_lidar.lua" 
     output="screen">
     <remap from="scan" to="scan"/>
     <remap from="odom" to="odom"/>
