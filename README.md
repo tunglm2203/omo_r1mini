@@ -14,8 +14,8 @@ Below image represents R1mini PRO which can be purchased from [here](https://omo
   <img src="images/r1mini_pro.png">
 </div>
 
-한글 튜토리얼 깃북은 다음 페이지를 참조하세요.
-[https://omorobot.gitbook.io/manual/product/omo-r1mini/ros](https://omorobot.gitbook.io/manual/product/omo-r1mini/ros)
+한글 튜토리얼은 오모로봇 공식 홈페이지의 e메뉴얼을 참고하세요.
+[https://omorobot.com/e-manual/](https://omorobot.com/e-manual/)
 
 For English version tutorial, please refer to below gitbook page.
 [https://kairosiann.gitbook.io/r1mini/](https://kairosiann.gitbook.io/r1mini/)
