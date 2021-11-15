@@ -1,7 +1,7 @@
 <launch>
   <arg name="set_port" default="/dev/ttyTHS1"/>
   <arg name="set_max_lin_vel_x" default="1.2"/>
-  <arg name="set_max_ang_vel_z" default="1.0"/>
+  <arg name="set_max_ang_vel_z" default="2.0"/>
   <node pkg="omo_r1mini_bringup" type="omo_r1mini_node.py" name="omo_r1mini_node" output="screen">
       <param name="port" value="$(arg set_port)"/>
       <param name="baud" value="115200"/>
