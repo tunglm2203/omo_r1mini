@@ -2,21 +2,22 @@
 # Set minimum required version of cmake, project name and compile options
 ################################################################################
 cmake_minimum_required(VERSION 2.8.3)
-project(omo_r1mini_teleop)
+project(omo_r1mini_cartographer)
 
 ################################################################################
 # Find catkin packages and libraries for catkin and system dependencies
 ################################################################################
 find_package(catkin REQUIRED COMPONENTS
-  rospy
-  geometry_msgs
+  roscpp
   sensor_msgs
+  cartographer_ros
+  tf
+  nav_msgs
 )
 
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
-catkin_python_setup()
 
 ################################################################################
 # Declare ROS messages, services and actions
@@ -30,23 +31,20 @@ catkin_python_setup()
 # Declare catkin specific configuration to be passed to dependent projects
 ################################################################################
 catkin_package(
-  CATKIN_DEPENDS rospy geometry_msgs sensor_msgs
+  CATKIN_DEPENDS roscpp sensor_msgs  
 )
 
 ################################################################################
 # Build
 ################################################################################
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
 
 ################################################################################
 # Install
 ################################################################################
-catkin_install_python(PROGRAMS
-  nodes/omo_r1mini_teleop_key.py
-  nodes/omo_r1mini_teleop_joy.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-install(DIRECTORY launch
+install(DIRECTORY bag config launch rviz
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
