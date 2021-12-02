@@ -2,9 +2,9 @@
   <arg name="set_port" default="/dev/ttyLiDAR"/>
   <arg name="set_frame_id" default="base_scan"/>
 
-  <node pkg="ydlidar" type="ydlidar_node" name="omo_r1_ydlidar" output="screen" respawn="false" >
+  <node pkg="ydlidar_ros" type="ydlidar_node" name="omo_r1_ydlidar" output="screen" respawn="false" >
     <param name="port"         type="string" value="$(arg set_port)"/>  
-    <param name="baudrate"     type="int"    value="115200"/>
+    <param name="baudrate"     type="int"    value="128000"/>
     <param name="frame_id"     type="string" value="$(arg set_frame_id)"/>
     <param name="low_exposure"  type="bool"   value="false"/>
     <param name="resolution_fixed"    type="bool"   value="true"/>
@@ -12,9 +12,9 @@
     <param name="reversion"    type="bool"   value="false"/>
     <param name="angle_min"    type="double" value="-180" />
     <param name="angle_max"    type="double" value="180" />
-    <param name="range_min"    type="double" value="0.05" />
-    <param name="range_max"    type="double" value="10.0" />
-    <param name="samp_rate"    type="int"    value="9"/>
-    <param name="frequency"    type="double" value="7"/>
+    <param name="range_min"    type="double" value="0.1" />
+    <param name="range_max"    type="double" value="12.0" />
+    <param name="samp_rate"    type="int"    value="5"/>
+    <param name="frequency"    type="double" value="8"/>
   </node>
 </launch>
