@@ -118,6 +118,7 @@ class OMOR1miniNode:
         rospy.Service('save_led_color', Color, self.save_led_color_service_handle)
         rospy.Service('reset_odom', ResetOdom, self.reset_odom_handle)
         rospy.Service('set_headlight', Onoff, self.set_headlight_handle)
+        rospy.Service('set_buzzer', Onoff, self.set_buzzer_handle)
         rospy.Service('calibrate_gyro', Calg, self.calibrate_gyro)
 
         rospy.Subscriber("cmd_vel", Twist, self.sub_cmd_vel, queue_size=1)
@@ -306,6 +307,14 @@ class OMOR1miniNode:
         if req.set == True:
             onoff = '1'
         command = "$cHDLT," + onoff
+        self.ph.write_port(command)
+        return OnoffResponse()
+    
+    def set_buzzer_handle(self, req):
+        onoff = '0'
+        if req.set == True:
+            onoff = '1'
+        command = "$sBUZEN," + onoff
         self.ph.write_port(command)
         return OnoffResponse()
 
