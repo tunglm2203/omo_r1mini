@@ -35,6 +35,9 @@ if os.name == 'nt':
 else:
   import tty, termios
 
+from omo_r1mini_bringup.srv import Onoff, OnoffResponse
+from omo_r1mini_bringup.srv import SaveColor, ColorResponse
+
 #OMO_R1mini_MAX_LIN_VEL = 1.20
 #OMO_R1mini_MAX_ANG_VEL = 1.80
 
@@ -53,6 +56,9 @@ w/x : increase/decrease linear velocity (~ 1.2 m/s)
 a/d : increase/decrease angular velocity (~ 1.8)
 
 space key, s : force stop
+
+b : Buzzer turn On/Off
+h : Headlight turn On/Off
 
 CTRL-C to quit
 """
@@ -108,6 +114,34 @@ def checkAngularLimitVelocity(vel, max):
 
     return vel
 
+# Service call 
+def set_headlight_onOff(headOnOff):
+    rospy.wait_for_service('set_headlight')
+    try:
+        srv_headOnOff = rospy.ServiceProxy('/set_headlight', Onoff)
+        OnoffResponse = srv_headOnOff(headOnOff)
+
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+
+def set_buzzer_onOff(buzzerOnOff):
+    rospy.wait_for_service('set_headlight')
+    try:
+        srv_buzzerOnOff = rospy.ServiceProxy('/set_buzzer', Onoff)
+        OnoffResponse = srv_buzzerOnOff(buzzerOnOff)
+
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+
+def set_ledColor(red, grn, blu):
+    rospy.wait_for_service('save_led_color')
+    try:
+        srv_saveLedColor = rospy.ServiceProxy('/save_led_color', SaveColor)
+        SaveColorResponse = srv_saveLedColor(red, grn, blu)
+
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
@@ -128,6 +162,8 @@ if __name__=="__main__":
     target_angular_vel  = 0.0
     control_linear_vel  = 0.0
     control_angular_vel = 0.0
+    headlightOn = False
+    buzzerOn = False
 
     try:
         print(msg)
@@ -161,6 +197,26 @@ if __name__=="__main__":
                 target_angular_vel  = 0.0
                 control_angular_vel = 0.0
                 print(vels(target_linear_vel, target_angular_vel))
+            elif key == 'b' :
+                if buzzerOn == True:
+                    buzzerOn = False
+                    set_buzzer_onOff(False)
+                    print("Buzzer: OFF")
+                else :
+                    buzzerOn = True
+                    set_buzzer_onOff(True)
+                    print("Buzzer: ON")
+                
+            elif key == 'h' :
+                if headlightOn == True:
+                    headlightOn = False
+                    set_headlight_onOff(False)
+                    print("Headlight: OFF")
+                else :
+                    headlightOn = True
+                    set_headlight_onOff(True)
+                    print("Headlight: ON")
+
             else:
                 if (key == '\x03'):
                     break
