@@ -37,12 +37,7 @@ else:
 
 from omo_r1mini_bringup.srv import Onoff, OnoffResponse
 from omo_r1mini_bringup.srv import SaveColor, ColorResponse
-
-#OMO_R1mini_MAX_LIN_VEL = 1.20
-#OMO_R1mini_MAX_ANG_VEL = 1.80
-
-#LIN_VEL_STEP_SIZE = 0.05
-#ANG_VEL_STEP_SIZE = 0.1
+from omo_r1mini_bringup.srv import Battery
 
 msg = """
 Control Your OMO Robot!
@@ -142,6 +137,16 @@ def set_ledColor(red, grn, blu):
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
 
+def get_BatteryPower():
+    rospy.wait_for_service('battery_status')
+    try:
+        srv_Battery = rospy.ServiceProxy('/battery_status', Battery)
+        res = srv_Battery()
+        print("Battery V: %.2f, SOC: %.1f, A: %.2f" % (res.volt, res.SOC, res.current) )
+
+    except rospy.ServiceException as e:
+        print("Service call failed: %s"%e)
+
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
@@ -216,6 +221,9 @@ if __name__=="__main__":
                     headlightOn = True
                     set_headlight_onOff(True)
                     print("Headlight: ON")
+
+            elif key == 'p' :
+                get_BatteryPower()
 
             else:
                 if (key == '\x03'):
