@@ -54,6 +54,7 @@ space key, s : force stop
 
 b : Buzzer turn On/Off
 h : Headlight turn On/Off
+c : Change RGB led Rainbow color
 
 CTRL-C to quit
 """
@@ -169,7 +170,9 @@ if __name__=="__main__":
     control_angular_vel = 0.0
     headlightOn = False
     buzzerOn = False
-
+    colors = [ [255, 0, 0], [255,50, 0], [255,255,0], [0,255,0], 
+            [0,0,255], [0,5,255], [100,0,255], [255,255,255] ]
+    colorIdx = 0
     try:
         print(msg)
         while(1):
@@ -224,6 +227,13 @@ if __name__=="__main__":
 
             elif key == 'p' :
                 get_BatteryPower()
+
+            elif key == 'c' :
+                rospy.loginfo("Color Set: %s, %s, %s", colors[colorIdx][0], colors[colorIdx][1],colors[colorIdx][2])
+                set_ledColor(colors[colorIdx][0], colors[colorIdx][1],colors[colorIdx][2])
+                colorIdx += 1
+                if colorIdx == len(colors):
+                    colorIdx = 0
 
             else:
                 if (key == '\x03'):
