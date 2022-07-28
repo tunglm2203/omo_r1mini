@@ -1,3 +1,4 @@
 omo_r1mini_navigation/maps/*
 omo_r1mini_navigation2/maps/*
 *.pyc
+.idea/
