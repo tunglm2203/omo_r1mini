@@ -42,7 +42,6 @@
       <odometryFrame>odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <publishOdomTF>true</publishOdomTF>
-<!--      <robotBaseFrame>base_link</robotBaseFrame>-->
       <robotBaseFrame>base_footprint</robotBaseFrame>
       <publishWheelTF>false</publishWheelTF>
       <publishTf>true</publishTf>
@@ -63,8 +62,7 @@
   <gazebo>
     <plugin name="imu_controller" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
-<!--      <bodyName>base_link</bodyName>-->
-      <bodyName>base_footprint</bodyName>
+      <bodyName>base_link</bodyName>
       <frameName>imu_link</frameName>
       <topicName>imu/data</topicName>
       <serviceName>imu_service</serviceName>
@@ -165,8 +163,8 @@
   <gazebo>
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>40</updateRate>
-      <bodyName>base_footprint</bodyName>
-      <frameId>base_footprint</frameId>
+      <bodyName>base_link</bodyName>
+      <frameId>base_link</frameId>
       <topicName>navsat/fix</topicName>
       <velocityTopicName>navsat/vel</velocityTopicName>
       <referenceLatitude>49.9</referenceLatitude>
