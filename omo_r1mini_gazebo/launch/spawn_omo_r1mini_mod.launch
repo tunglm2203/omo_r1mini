@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <arg name="robot_namespace" default="/"/>
+
+    <group ns="$(arg robot_namespace)">
+
+        <param name="robot_description"
+               command="$(find xacro)/xacro --inorder $(find omo_r1mini_gazebo)/sdf/custom_omo_r1mini.gazebo.xacro"/>
+
+        <!-- Load controller configuration -->
+<!--        <rosparam command="load" file="$(find husky_control)/config/control_mod.yaml"/>-->
+
+        <!-- Spawn controllers -->
+<!--        <node pkg="controller_manager" type="spawner" name="base_controller_spawner"-->
+<!--              args="husky_joint_publisher husky_velocity_controller &#45;&#45;shutdown-timeout 3"/>-->
+
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"  />
+
+<!--        <node pkg="twist_mux" type="twist_mux" name="twist_mux">-->
+<!--            <rosparam command="load" file="$(find outdoor_waypoint_nav)/params/twist_mux_mod.yaml"/>-->
+<!--            <remap from="cmd_vel_out" to="cmd_vel"/>-->
+<!--        </node>-->
+
+        <!-- Spawn robot in gazebo -->
+        <node pkg="gazebo_ros" type="spawn_model" name="spawn_omo_r1mini_model"
+              args="
+          -x 0
+          -y 0
+          -z 0
+          -Y 0
+          -unpause
+          -urdf
+          -param robot_description
+          -model omo_r1_sim
+          -robot_namespace $(arg robot_namespace) "/>
+    </group>
+
+</launch>
