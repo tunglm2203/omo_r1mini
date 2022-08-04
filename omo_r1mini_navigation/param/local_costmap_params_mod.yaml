@@ -1,0 +1,14 @@
+local_costmap:
+  global_frame: odom  # define what coordinate frame the costmap should run in
+  robot_base_frame: base_footprint  # define the coordinate frame the costmap should reference for the base of the robot
+
+  update_frequency: 1.0  # [Hz] the frequency at which the costmap will run its update loop
+  publish_frequency: 2.0
+  transform_tolerance: 0.5  
+
+  static_map: false  # whether the costmap should initialize itself based on a map served by the map_server. If you aren't using an existing map or map server, set the static_map parameter to false
+  rolling_window: true  # whether the costmap will remain centered around the robot as the robot moves through the world
+  width: 3  # [m]
+  height: 3 # [m]
+  resolution: 0.05  # [m/cell]
+  
