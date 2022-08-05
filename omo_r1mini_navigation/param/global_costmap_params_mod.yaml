@@ -1,3 +1,4 @@
+# Reference: http://wiki.ros.org/base_local_planner
 global_costmap:
   global_frame: odom  # define what coordinate frame the costmap should run in
   robot_base_frame: base_footprint  # define the coordinate frame the costmap should reference for the base of the robot
