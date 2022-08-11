@@ -2,44 +2,4 @@
 <robot name="omo_r1_sim" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find omo_r1mini_gazebo)/sdf/omo_r1mini_v1.gazebo.xacro"/>
 
-
-  <!-- Insert GPS Mount -->
-
-<!--  <link name="GPS_mount_link">-->
-<!--  <visual>-->
-<!--    <origin xyz="0 0 0" rpy="0 0 0" />-->
-<!--    <geometry>-->
-<!--      <mesh filename="package://omo_r1mini_description/meshes/gps_mount.STL" scale="0.0005 0.0005 0.0005" />-->
-<!--    </geometry>-->
-<!--    <material name="black">-->
-<!--      <color rgba="0 0 0 1.0" />-->
-<!--    </material>-->
-<!--  </visual>-->
-<!--  </link>-->
-
-<!--  <joint name="GPS_mount_joint" type="fixed">-->
-<!--    <parent link="base_link" />-->
-<!--    <child link="GPS_mount_link" />-->
-<!--    <origin xyz="0 0 0.1" rpy="0 0 0" />-->
-<!--  </joint>-->
-
-  <!-- Insert GPS -->
-
-  <link name="GPS_link">
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <geometry>
-      <mesh filename="package://omo_r1mini_description/meshes/novatel-smart6.stl" scale="0.1 0.1 0.1"/>
-    </geometry>
-    <material name="novatel_white">
-      <color rgba="0.8 0.8 0.8 1.0" />
-    </material>
-  </visual>
-  </link>
-
-  <joint name="GPS_joint" type="fixed">
-    <parent link="base_link" />
-    <child link="GPS_link" />
-    <origin xyz="-0.1 0 0.01" rpy="0 0 0" />
-  </joint>
 </robot>
